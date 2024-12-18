@@ -6,7 +6,11 @@ const port = 8080;
 const cors = require("cors");
 app.use(cors());
 
-app.get("/api/pokemons", async (req, res) => {
+app.get("/", (req, res) =>
+  res.status(200).json("Welcome, your app is working well")
+);
+
+app.get("/pokemons", async (req, res) => {
   try {
     const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=20");
     const data = await response.json();
@@ -35,3 +39,5 @@ app.get("/api/pokemons", async (req, res) => {
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
+
+module.exports = app;
