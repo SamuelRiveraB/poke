@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import ReactDOM from "react-dom";
 import "./App.css";
 
 function App() {
@@ -10,27 +9,9 @@ function App() {
   useEffect(() => {
     const fetchPokemons = async () => {
       try {
-        const response = await fetch(
-          "https://pokeapi.co/api/v2/pokemon?limit=20"
-        );
+        const response = await fetch("http://localhost:8080/api/pokemons");
         const data = await response.json();
-
-        const detailedPokemons = await Promise.all(
-          data.results.map(async (pokemon) => {
-            const res = await fetch(pokemon.url);
-            const details = await res.json();
-            return {
-              name: pokemon.name,
-              sprite: details.sprites.front_default,
-              base_experience: details.base_experience,
-              height: details.height,
-              weight: details.weight,
-              url: pokemon.url,
-            };
-          })
-        );
-
-        setPokemons(detailedPokemons);
+        setPokemons(data);
       } catch (error) {
         console.error("Failed to fetch Pokémon:", error);
       }
