@@ -9,7 +9,9 @@ function App() {
   useEffect(() => {
     const fetchPokemons = async () => {
       try {
-        const response = await fetch("http://localhost:8080/api/pokemons");
+        const response = await fetch(
+          "https://poke-server-f87h.vercel.app/pokemons"
+        );
         const data = await response.json();
         setPokemons(data);
       } catch (error) {
